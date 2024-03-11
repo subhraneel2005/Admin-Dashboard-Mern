@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios"
 import { MdDelete } from "react-icons/md";
-import { FaExternalLinkAlt } from "react-icons/fa"
+import { FaExternalLinkAlt } from "react-icons/fa";
+import CourseContext from '../contexts/CourseContext';
+import { Link } from 'react-router-dom';
 
 function Admin() {
 
@@ -21,6 +23,9 @@ function Admin() {
     useEffect(()=>{
         getAllCourses();
     },[]);
+
+    const {id} = useContext(CourseContext);
+    const SingleCourseRoute = `http://localhost/${id}`;
 
     const uploadCourse = async() => {
         axios.post("http://localhost:3000/admin", {
@@ -51,11 +56,10 @@ function Admin() {
    };
   return (
 
-    <div className='h-auto w-full flex justify-center items-center p-3 bg-slate-400'>
+    <div className='h-svh w-full flex justify-center items-center p-3 bg-slate-400'>
         <div className='h-full w-full rounded-xl bg-transparent text-slate-800 font-bold flex justify-center items-center'>
             <div className='block'>
-            <h1 className='text-center text-6xl text-slate-900 mb-6 select-none'>Courses</h1>
-                <div className='grid gap-5 grid-cols-2 md:grid-cols-3'>
+                <div className='grid gap-5 grid-cols-2 md:grid-cols-3 mt-[70px]'>
                     <input 
                     type="text"
                     placeholder='Title'
@@ -100,7 +104,9 @@ function Admin() {
                                 </div>
                                 <div className='w-full flex justify-between px-3 py-1 mt-4'>
                                     <MdDelete className='cursor-pointer text-red-600' size={30} onClick={()=>removeCourse(course._id)}></MdDelete>
-                                    <FaExternalLinkAlt className='cursor-pointer' size={25}></FaExternalLinkAlt>
+                                    <Link to={`http://localhost:3000/${id}`}>
+                                        <FaExternalLinkAlt className='cursor-pointer' size={25}></FaExternalLinkAlt>
+                                    </Link>
                                 </div>
                                 </div>
                             </div>

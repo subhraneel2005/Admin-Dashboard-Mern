@@ -60,10 +60,23 @@ const updateAdminById = async(req,res) => {
     }
 }
 
+const getCoursesbyId = async(req,res) => {
+    try {
+        const courses = await adminModel.findById(req.params.id);
+        if (!courses) {
+            return res.status(404).json({ message: 'Course not found' });
+        }
+        res.json(courses);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 app.post("/admin", postAdmin);
 app.get("/admin", getAllAdmins);
 app.delete("/:id", deleteAdminById);
 app.put("/:id", updateAdminById);
+app.get("/:id", getCoursesbyId);
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);

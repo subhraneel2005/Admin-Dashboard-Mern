@@ -1,11 +1,14 @@
 import React from 'react'
 import Admin from './components/Admin'
+import NavBara from './components/NavBara'
+import CourseContextProvider from './contexts/CourseContextProvider'
 
 function App() {
   return (
-    <div>
+    <CourseContextProvider>
+      <NavBara/>
       <Admin/>
-    </div>
+    </CourseContextProvider>
   )
 }
 
