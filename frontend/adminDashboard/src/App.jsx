@@ -23,13 +23,13 @@ function App() {
   } else {
 
   return (
-    <CourseContextProvider>
+    <div>
       <AppBara/>
       <Routes>
         <Route path="/" element={<Admin />} />
         <Route path="/:id" element={<SingleCoursePage />} />
       </Routes>
-    </CourseContextProvider>
+    </div>
   )
 }}
 

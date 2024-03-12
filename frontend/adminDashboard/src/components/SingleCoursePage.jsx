@@ -18,22 +18,27 @@ function SingleCoursePage() {
       });
   }, [id]);
 
+  
+  function backToHome(){
+    window.location.href = "/"
+  }
+
   if (!course) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <section className="flex flex-col justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
+      <div className="flex flex-col justify-center  bg-gray-50 text-gray-600 min-h-screen p-4">
     <div className="h-full">
         
         <div className="max-w-xs mx-auto">
             <div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
                 
-                <a className="block focus:outline-none focus-visible:ring-2" href="#0">
-                    <figure className="relative h-0 pb-[56.25%] overflow-hidden">
-                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={course.thumbnail} width="320" height="180" alt="Course"></img>
-                    </figure>
+                <a className="block">
+                    <div className="relative h-0 pb-[56.25%] overflow-hidden">
+                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={course.thumbnail} alt="Course"></img>
+                    </div>
                 </a>
                 
                 <div className="flex-grow flex flex-col p-5">
@@ -41,9 +46,8 @@ function SingleCoursePage() {
                     <div className="flex-grow">
                         
                         <header className="mb-3">
-                            <a className="block focus:outline-none focus-visible:ring-2" href="#0">
-                                <h3 className="text-[22px] text-gray-900 font-extrabold leading-snug">{course.title}</h3>
-                            </a>
+                            
+                                <h3 className="text-[22px] text-gray-900 font-extrabold">{course.title}</h3>
                         </header>
                     
                         <div className="mb-8">
@@ -51,14 +55,14 @@ function SingleCoursePage() {
                         </div>
                     </div>
                     
-                    <div className="flex justify-end space-x-2">
-                        <button onClick={()=>{window.location("http://localhost:3000")}} className="font-medium text-sm inline-flex items-center justify-center px-3 py-1.5 rounded leading-5 text-gray-500 hover:underline focus:outline-none focus-visible:ring-2" >Go to Home</button>
+                    <div className="flex justify-end">
+                        <button onClick={backToHome} className="font-medium text-sm inline-flex items-center justify-center px-3 py-1.5 rounded text-gray-500 hover:underline" >Go to Home</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
     </div>
   );
 }

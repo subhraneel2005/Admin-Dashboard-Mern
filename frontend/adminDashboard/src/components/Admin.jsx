@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios"
-import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 
 
@@ -75,10 +73,10 @@ function Admin() {
   });
   return (
 
-    <div classNameName=' w-full flex justify-center items-center p-3'>
-        <div classNameName='h-full w-full rounded-xl bg-transparent text-slate-800 font-bold flex justify-center items-center'>
-            <div classNameName='block'>
-                <div classNameName='grid gap-5 grid-cols-2 md:grid-cols-3 mt-[70px]'>
+    <div className='w-full flex justify-center items-center p-3'>
+        <div className='h-full w-full rounded-xl bg-transparent text-slate-800 font-bold flex justify-center items-center'>
+            <div className='block'>
+                <div className='grid gap-5 grid-cols-2 md:grid-cols-3 mt-[70px]'>
                     <TextField id="filled-basic" label="Title" variant="filled"
                     value={title}
                     onChange={(e)=>setTitle(e.target.value)}/>
@@ -106,17 +104,17 @@ function Admin() {
                     />
                     <Button variant="outlined" onClick={uploadCourse}>Add Course</Button>
                 </div>
-                <div classNameName='grid grid-cols-1 md:grid-cols-3 mt-10 gap-5'>
+                <div className='grid grid-cols-1 md:grid-cols-3 mt-10 gap-5'>
                     {allCourses.map((course) => (
-                        <div classNameName='w-[300px] h-[300px] rounded-xl bg-slate-800 shadow-xl text-slate-200 font-bold overflow-hidden flex justify-center items-center ml-6 md:ml-0'>
-                            <div classNameName='flex justify-center items-center h-full w-full'>
-                                <div classNameName='block'>
-                                <img classNameName='px-4' src={course.thumbnail}/>
-                                <div classNameName='flex justify-between px-3 py-1 mt-4'>
-                                    <h1 classNameName='text-xl font-bold'>{course.title}</h1>
-                                    <h1 classNameName='text-xl  text-gray-100 font-bold'>{`₹${course.price}`}</h1>
+                        <div className='w-[300px] h-[300px] rounded-xl bg-slate-800 shadow-xl text-slate-200 font-bold overflow-hidden flex justify-center items-center ml-6 md:ml-0'>
+                            <div className='flex justify-center items-center h-full w-full'>
+                                <div className='block'>
+                                <img className='px-4' src={course.thumbnail}/>
+                                <div className='flex justify-between px-3 py-1 mt-4'>
+                                    <h1 className='text-xl font-bold'>{course.title}</h1>
+                                    <h1 className='text-xl  text-gray-100 font-bold'>{`₹${course.price}`}</h1>
                                 </div>
-                                <div classNameName='w-full flex justify-between px-3 py-1 mt-4'>
+                                <div className='w-full flex justify-between px-3 py-1 mt-4'>
                                 <Button variant="outlined" color="error" onClick={()=>removeCourse(course._id)}>
                                 Delete
                                 </Button>
