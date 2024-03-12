@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import CourseContext from '../contexts/CourseContext';
 import { Link } from 'react-router-dom';
+import SingleCoursePage from './SingleCoursePage';
 
 function Admin() {
 
@@ -24,8 +25,7 @@ function Admin() {
         getAllCourses();
     },[]);
 
-    const {id} = useContext(CourseContext);
-    const SingleCourseRoute = `http://localhost/${id}`;
+    
 
     const uploadCourse = async() => {
         axios.post("http://localhost:3000/admin", {
@@ -104,7 +104,7 @@ function Admin() {
                                 </div>
                                 <div className='w-full flex justify-between px-3 py-1 mt-4'>
                                     <MdDelete className='cursor-pointer text-red-600' size={30} onClick={()=>removeCourse(course._id)}></MdDelete>
-                                    <Link to={`http://localhost:3000/${id}`}>
+                                    <Link to={`http://localhost:3000/${course._id}`}>
                                         <FaExternalLinkAlt className='cursor-pointer' size={25}></FaExternalLinkAlt>
                                     </Link>
                                 </div>

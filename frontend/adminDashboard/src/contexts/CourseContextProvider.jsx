@@ -4,18 +4,18 @@ import {useParams} from "react-router-dom"
 import CourseContext from './CourseContext';
 
 function CourseContextProvider({children}) {
-    const[course, setCourse] = useState(null);
-    const {id} = useParams();
-    const getSingleCourse = async() => {
-        try {
-            const response = await axios.get(`http://localhost/${id}`);
-            setCourse(response.data);
-        } catch (error) {
-            console.log(error);
-        }
+    const[allCourses, setAllCourses] = useState([]);
+
+    const getAllCourses = async() => {
+        const resp = await axios.get("http://localhost:3000/admin");
+        setAllCourses(resp.data);
     }
+
+    useEffect(()=>{
+        getAllCourses();
+    },[]);
   return (
-    <CourseContext.Provider value={{course, getSingleCourse, id}}>
+    <CourseContext.Provider value={{getAllCourses,  allCourses}}>
         {children}
     </CourseContext.Provider>
   )
