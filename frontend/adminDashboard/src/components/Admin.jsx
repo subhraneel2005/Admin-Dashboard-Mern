@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios"
-import { MdDelete } from "react-icons/md";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import CourseContext from '../contexts/CourseContext';
 import { Link } from 'react-router-dom';
-import SingleCoursePage from './SingleCoursePage';
+import TextField from '@mui/material';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+
 
 function Admin() {
 
@@ -15,6 +16,7 @@ function Admin() {
     const[published, setPublished] = useState(false);
     const[thumbnail, setPhoto] = useState("");
     const[video, setVideo] = useState("");
+    
 
     const getAllCourses = async() => {
         const resp = await axios.get("http://localhost:3000/admin");
@@ -60,37 +62,27 @@ function Admin() {
         <div className='h-full w-full rounded-xl bg-transparent text-slate-800 font-bold flex justify-center items-center'>
             <div className='block'>
                 <div className='grid gap-5 grid-cols-2 md:grid-cols-3 mt-[70px]'>
-                    <input 
-                    type="text"
-                    placeholder='Title'
+                    <TextField id="filled-basic" label="Title" variant="filled"
                     value={title}
-                    onChange={(e)=>setTitle(e.target.value)}
-                    className='border-none outline-none bg-slate-800 text-white px-3 py-2 rounded-lg' />
-                    <input 
-                    type="text"
-                    placeholder='Description'
+                    onChange={(e)=>setTitle(e.target.value)}/>
+                    <TextField id="filled-basic" label="Description" variant="filled"
                     value={description}
-                    onChange={(e)=>setDes(e.target.value)}
-                    className='border-none outline-none bg-slate-800 text-white px-3 py-2 rounded-lg' />
-                    <input 
-                    type="Number"
-                    placeholder='Price'
-                    value={price}
-                    onChange={(e)=>setPrice(e.target.value)}
-                    className='border-none outline-none bg-slate-800 text-white px-3 py-2 rounded-lg' />
-                    <input 
-                    type="Text"
-                    placeholder='Image url(Optional)'
+                    onChange={(e)=>setDes(e.target.value)}/>
+                    <TextField
+                    id="outlined-number"
+                    label="Price"
+                    type="number"
+                    value={price} onChange={(e)=>setPrice(e.target.value)}
+                    />
+                    <TextField id="filled-basic" label="Image Url(Optional)" variant="filled"
                     value={thumbnail}
-                    onChange={(e)=>setPhoto(e.target.value)}
-                    className='border-none outline-none bg-slate-800 text-white px-3 py-2 rounded-lg' />
-                    <input 
-                    type="Text"
-                    placeholder='Video url(Optional)'
+                    type='file'
+                    onChange={(e)=>setPhoto(e.target.value)}/>
+                    <TextField id="filled-basic" label="Video Url(Optional)" variant="filled"
                     value={video}
-                    onChange={(e)=>setVideo(e.target.value)}
-                    className='border-none outline-none bg-slate-800 text-white px-3 py-2 rounded-lg' />
-                    <button className=' cursor-pointer bg-sky-900 text-sky-300 p-3 rounded-[30px]' onClick={uploadCourse}>Add Course</button>
+                    type='file'
+                    onChange={(e)=>setVideo(e.target.value)}/>
+                    <Button variant="contained" onClick={uploadCourse}>Contained</Button>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-3 mt-10 gap-5'>
                     {allCourses.map((course) => (
@@ -103,10 +95,14 @@ function Admin() {
                                     <h1 className='text-xl  text-gray-100 font-bold'>{`₹${course.price}`}</h1>
                                 </div>
                                 <div className='w-full flex justify-between px-3 py-1 mt-4'>
-                                    <MdDelete className='cursor-pointer text-red-600' size={30} onClick={()=>removeCourse(course._id)}></MdDelete>
-                                    <Link to={`http://localhost:3000/${course._id}`}>
-                                        <FaExternalLinkAlt className='cursor-pointer' size={25}></FaExternalLinkAlt>
-                                    </Link>
+                                <Button variant="outlined" startIcon={<DeleteIcon />} onclick={()=>removeCourse(course._id)}>
+                                Delete
+                                </Button>
+                                <Link to={`http://localhost:3000/${course._id}`}>
+                                    <Button variant="contained" endIcon={<SendIcon />}>
+                                    View
+                                    </Button>
+                                </Link>
                                 </div>
                                 </div>
                             </div>
@@ -120,3 +116,7 @@ function Admin() {
 }
 
 export default Admin
+
+
+// placeholder='Title'
+                
