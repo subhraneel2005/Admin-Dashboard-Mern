@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios"
 import { Link } from 'react-router-dom';
-import TextField from '@mui/material';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
+
 
 
 function Admin() {
@@ -37,7 +38,10 @@ function Admin() {
         published: published,
         thumbnail: thumbnail,
         video: video,
-        }).then(resp => {setAllCourses([...allCourses, resp.data]); 
+        }).then(() => {setAllCourses(newCourse => {
+            const  newArray = [...allCourses, newCourse];
+            return newArray;
+        }); 
             setTitle("");
             setDes("");
             setPrice();
@@ -56,9 +60,21 @@ function Admin() {
             })
        }).catch(error => console.log(error));
    };
+
+   const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
   return (
 
-    <div className='h-svh w-full flex justify-center items-center p-3 bg-slate-400'>
+    <div className=' w-full flex justify-center items-center p-3'>
         <div className='h-full w-full rounded-xl bg-transparent text-slate-800 font-bold flex justify-center items-center'>
             <div className='block'>
                 <div className='grid gap-5 grid-cols-2 md:grid-cols-3 mt-[70px]'>
@@ -74,15 +90,20 @@ function Admin() {
                     type="number"
                     value={price} onChange={(e)=>setPrice(e.target.value)}
                     />
-                    <TextField id="filled-basic" label="Image Url(Optional)" variant="filled"
-                    value={thumbnail}
-                    type='file'
-                    onChange={(e)=>setPhoto(e.target.value)}/>
-                    <TextField id="filled-basic" label="Video Url(Optional)" variant="filled"
-                    value={video}
-                    type='file'
-                    onChange={(e)=>setVideo(e.target.value)}/>
-                    <Button variant="contained" onClick={uploadCourse}>Contained</Button>
+                    <TextField
+                    id="outlined-number"
+                    label="Image Url"
+                    type="text"
+                    value={thumbnail} onChange={(e)=>setPhoto(e.target.value)}
+                    />
+                    <VisuallyHiddenInput type="file" />
+                    <TextField
+                    id="outlined-number"
+                    label="Video Url (Optional)"
+                    type="text"
+                    value={video} onChange={(e)=>setVideo(e.target.value)}
+                    />
+                    <Button variant="outlined" onClick={uploadCourse}>Add Course</Button>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-3 mt-10 gap-5'>
                     {allCourses.map((course) => (
@@ -95,14 +116,12 @@ function Admin() {
                                     <h1 className='text-xl  text-gray-100 font-bold'>{`₹${course.price}`}</h1>
                                 </div>
                                 <div className='w-full flex justify-between px-3 py-1 mt-4'>
-                                <Button variant="outlined" startIcon={<DeleteIcon />} onclick={()=>removeCourse(course._id)}>
+                                <Button variant="outlined" color="error" onClick={()=>removeCourse(course._id)}>
                                 Delete
                                 </Button>
-                                <Link to={`http://localhost:3000/${course._id}`}>
-                                    <Button variant="contained" endIcon={<SendIcon />}>
-                                    View
-                                    </Button>
-                                </Link>
+                                <Button variant="outlined" href={`http://localhost:3000/${course._id}`}>
+                                    Link
+                                </Button>
                                 </div>
                                 </div>
                             </div>
