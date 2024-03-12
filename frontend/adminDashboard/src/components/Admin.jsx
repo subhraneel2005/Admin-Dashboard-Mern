@@ -39,7 +39,7 @@ function Admin() {
         thumbnail: thumbnail,
         video: video,
         }).then(() => {setAllCourses(newCourse => {
-            const  newArray = [...allCourses, newCourse];
+            const  newArray = [...setAllCourses,newCourse];
             return newArray;
         }); 
             setTitle("");
@@ -49,6 +49,7 @@ function Admin() {
             setPhoto("");
             setVideo("");
         })
+        window.location.reload();
     }
 
     const  removeCourse = (id) => {
