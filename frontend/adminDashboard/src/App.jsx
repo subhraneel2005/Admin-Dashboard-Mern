@@ -3,6 +3,8 @@ import Admin from './components/Admin'
 import CourseContextProvider from './contexts/CourseContextProvider'
 import AppBara from './components/AppBara'
 import Loader from './components/Loader';
+import SingleCoursePage from './components/SingleCoursePage';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +25,10 @@ function App() {
   return (
     <CourseContextProvider>
       <AppBara/>
-      <Admin/>
+      <Routes>
+        <Route path="/" element={<Admin />} />
+        <Route path="/:id" element={<SingleCoursePage />} />
+      </Routes>
     </CourseContextProvider>
   )
 }}
