@@ -1,18 +1,15 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/coursesDB");
+mongoose.connect("mongodb://127.0.0.1:27017/usersDatabase");
 
-const coursesSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     _id: {
         type: String,
         default: () => Math.random().toString(36).substr(2,9)
     },
-    title: String,
-    description: String,
-    price: Number,
-    published: Boolean,
-    thumbnail: String,
-    video: String,
+    username:String,
+    password:String,
+    courses:[{type: mongoose.Schema._id, ref:"Adminss"}]
 });
 
-module.exports = mongoose.model("Courses", coursesSchema);
+module.exports = mongoose.model("Users", userSchema);
