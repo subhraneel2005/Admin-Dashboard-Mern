@@ -96,12 +96,12 @@ function Admin() {
                     value={thumbnail} onChange={(e)=>setPhoto(e.target.value)}
                     />
                     <VisuallyHiddenInput type="file" />
-                    <TextField
+                    {/* <TextField
                     id="outlined-number"
                     label="Video Url (Optional)"
                     type="text"
                     value={video} onChange={(e)=>setVideo(e.target.value)}
-                    />
+                    /> */}
                     <Button variant="outlined" onClick={uploadCourse}>Add Course</Button>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-3 mt-10 gap-5'>
