@@ -3,12 +3,48 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
 const adminModel = require("./Admins");
+// const userModel = require("./Courses");
 
 const PORT = 3000 || process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+//login logout and register functions for user
+
+// const register = async(req,res) => {
+//     try {
+//         const user = new userModel({
+//             username: req.body.username,
+//             password: req.body.password
+//         });
+//         await user.save();
+//         res.send('User registered successfully');
+//     } catch (error) {
+//         res.send("Error creating User");
+//     }
+// }
+
+// const login = async(req,res) => {
+//     const {username, password} = req.body;
+//     try {
+//         const user = await userModel.findOne({username});
+//         if(!user){
+//             res.send("No User found");
+//         }
+//         else{
+//             res.status(200).json(user);
+//         }
+//     } catch (error) {
+//         res.status(404).json({message: "Error logging in"});
+//     }
+// }
+
+// const logout = async(req,res) => {
+    
+// }
 
 //crud functions for admin
 
@@ -71,12 +107,14 @@ const getCoursesbyId = async(req,res) => {
         res.status(500).json({ message: err.message });
     }
 }
-
+//All admin routes
 app.post("/admin", postAdmin);
 app.get("/admin", getAllAdmins);
 app.delete("/:id", deleteAdminById);
 app.put("/:id", updateAdminById);
 app.get("/:id", getCoursesbyId);
+
+//All user routes
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
