@@ -14,14 +14,14 @@ const adminSchema = mongoose.Schema({
     thumbnail: String,
     video: String,
 });
-const userSchema = mongoose.Schema({
-    _id: {
-        type: String,
-        default: () => Math.random().toString(36).substr(2,9)
-    },
-    username:String,
-    password:String,
-    // courses:[{type: mongoose.Schema._id, ref:"Adminss"}]
-});
+// const userSchema = mongoose.Schema({
+//     _id: {
+//         type: String,
+//         default: () => Math.random().toString(36).substr(2,9)
+//     },
+//     username:String,
+//     password:String,
+//     // courses:[{type: mongoose.Schema._id, ref:"Adminss"}]
+// });
 
-module.exports = mongoose.model("Adminss", adminSchema, "Users", userSchema);
+module.exports = mongoose.model("Adminss", adminSchema);

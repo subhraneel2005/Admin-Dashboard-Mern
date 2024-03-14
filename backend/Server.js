@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const session = require("express-session");
 const adminModel = require("./Admins");
 const userModel = require("./Admins");
 
@@ -12,39 +12,46 @@ const PORT = 3000 || process.env.PORT;
 app.use(bodyParser.json());
 app.use(cors());
 
-//login logout and register functions for user
+// //session middleware
+// app.use(session({
+//     secret: "hahahaha",
+//     resave: false,
+//     saveUninitialized: false,
+// }));
+// //login logout and register functions for user
 
-const register = async(req,res) => {
-    try {
-        const user = new userModel({
-            username: req.body.username,
-            password: req.body.password
-        });
-        await user.save();
-        res.send('User registered successfully');
-    } catch (error) {
-        res.send("Error creating User");
-    }
-}
+// const register = async(req,res) => {
+//     try {
+//         const user = await userModel.create({
+//             username: req.body.username,
+//             password: req.body.password
+//         });
+//         req.session.user = user;
+//         res.status(200).json({message: "User registered successfully"});
+//     } catch (error) {
+//         res.send("Error creating User");
+//     }
+// }
 
-const login = async(req,res) => {
-    const {username, password} = req.body;
-    try {
-        const user = await userModel.findOne({username});
-        if(!user){
-            res.send("No User found");
-        }
-        else{
-            res.status(200).json(user);
-        }
-    } catch (error) {
-        res.status(404).json({message: "Error logging in"});
-    }
-}
+// const login = async(req,res) => {
+//     const {username, password} = req.body;
 
-const logout = async(req,res) => {
-    
-}
+//     try {
+//         const user = await userModel.findOne({ username, password});
+//         if(!user){
+//             return res.status(401).json({ message: 'Invalid Credentials' });
+//         }
+//         res.session.user = user;
+//         res.json({message: "Login successfull"});
+//     } catch (error) {
+//         res.status(500).json({message: "Server error"});
+//     }
+// }
+
+// const logout = async(req,res) => {
+//     req.session.destroy();
+//     res.json({message: "Logout successfull"});
+// }
 
 //crud functions for admin
 
@@ -115,9 +122,9 @@ app.put("/:id", updateAdminById);
 app.get("/:id", getCoursesbyId);
 
 //All user routes
-app.post("/register", register);
-app.get("/login", login);
-app.post("/logout", logout);
+// app.post("/register", register);
+// app.post("/login", login);
+// app.post("/logout", logout);
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
